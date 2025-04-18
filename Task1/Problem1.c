@@ -1,20 +1,34 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <math.h>
 
+void isArmstrong(int lowerLimit, int upperLimit){
+    if (lowerLimit > upperLimit)
+        return;
+
+    int sum=0,temp=lowerLimit, digits=0;
+
+    int num = temp;
+    while(num>0){
+        num /=10;
+        digits++;
+    }
+
+   while(temp !=0){
+    sum += pow(temp%10, digits);
+    temp /= 10;
+   }
+
+   if(sum == lowerLimit){
+    printf("%d, ", lowerLimit);
+}
+   isArmstrong(lowerLimit+1,  upperLimit);
+}
 int main()
 {
- int n, Max=0, Min=1e9;
- // extreme values for both min and max
- while (1){
-
-    scanf("%d", &n);
-    if(n == -1) break;
-
-    if ( n > Max) Max = n;
-    if (n < Min && n != -1) Min = n;
- }
-printf("%d %d", Max, Min);
+   int  lowerLimit, upperLimit;
+   scanf("%d %d", &lowerLimit, &upperLimit);
+   printf("Armstrong numbers between %d and %d are: ",lowerLimit, upperLimit);
+   isArmstrong(lowerLimit, upperLimit);
     return 0;
 }
 
